@@ -71,11 +71,16 @@ export async function getServerSideProps({ query }) {
     }
   }`;
   // Define request context
-  let requestContext = {
-    audienceAttributes: {
-      localTemperature: query.localTemp !== undefined ? parseInt(query.localTemp, 10) : null
-    }
-  };
+  let requestContext;
+  if (query.lexascmsRequestContext !== undefined) {
+    requestContext = query.lexascmsRequestContext;
+  } else {
+    requestContext = {
+      audienceAttributes: {
+        localTemperature: query.localTemp !== undefined ? parseInt(query.localTemp, 10) : null
+      }
+    };
+  }
   // Fetch homepage content
   const result = await request({
     query: homepageQuery,
