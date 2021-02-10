@@ -13,7 +13,13 @@ export default function Product({ product }) {
           </div>
           <p className="text-gray-500">{product.description}</p>
           <button type="button"
-                  className="h-11 bg-gray-900 hover:bg-gray-800 text-white uppercase text-xs tracking-wide font-bold rounded mt-4 transition-colors duration-150 ease-in-out">
+                  className="snipcart-add-item h-11 bg-gray-900 hover:bg-gray-800 text-white uppercase text-xs tracking-wide font-bold rounded mt-4 transition-colors duration-150 ease-in-out"
+                  data-item-id={product.id}
+                  data-item-price={product.price}
+                  data-item-url={`/products/${product.slug}`}
+                  data-item-description={product.description}
+                  data-item-image={product.image.url}
+                  data-item-name={product.name}>
             Add to basket
           </button>
         </div>
