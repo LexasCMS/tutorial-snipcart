@@ -1,34 +1,29 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Personalized E-Commerce Store Tutorial
 
-## Getting Started
+This is the complete tutorial source code for creating a personalized e-commerce store using [LexasCMS](https://www.lexascms.com/), [Snipcart](https://snipcart.com/) and [Next.js](https://nextjs.org/).
 
-First, run the development server:
+<p align="center">
+  <img src="preview@2x.jpg" alt="Personalized E-commerce Store Preview" style="max-width:90%;" />
+</p>
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+## Tutorial
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Coming soon...
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+## Live Demo
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+[Click here](https://lexascms-tutorial-snipcart.vercel.app/) to view a live demo of this repo.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+## Deploy to Vercel
 
-## Learn More
+Of course, you can play around with this source code by deploying it to your own Vercel account. To do so, please follow the instructions below:
 
-To learn more about Next.js, take a look at the following resources:
+1. If you don't already have them, [create a LexasCMS account](https://app.lexascms.com/signup) and a [Snipcart account](https://app.snipcart.com/account/register)
+2. Within LexasCMS:
+    1. Create a new space using the **E-commerce Tutorial (Snipcart)** template
+    2. Navigate to **Settings > General** and take note of your space ID
+    3. Navigate to **Settings > API Keys** and create a new API Key (being sure to enable preview permissions). Take note of the generated API Key
+3. From within your Snipcart dashboard, [navigate to your credentials](https://app.snipcart.com/dashboard/account/credentials) and take note of your API key
+4. Click the below button and follow the instructions
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https%3A%2F%2Fgithub.com%2FLexasCMS%2Ftutorial-snipcart&env=LEXASCMS_SPACE_ID,LEXASCMS_API_KEY,SNIPCART_API_KEY&project-name=lexascms-tutorial-snipcart&repo-name=lexascms-tutorial-snipcart)
