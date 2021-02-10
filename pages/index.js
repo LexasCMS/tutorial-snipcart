@@ -1,65 +1,75 @@
-import Head from 'next/head'
-import styles from '../styles/Home.module.css'
+import Link from 'next/link';
 
-export default function Home() {
+import Layout from '../components/layout';
+import { request } from '../lib/lexascms';
+
+export default function Home({ homepage }) {
   return (
-    <div className={styles.container}>
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+    <Layout>
+      <div className="flex flex-col gap-2 items-center justify-center bg-gray-200 text-white h-96 rounded bg-cover bg-center" style={{backgroundImage:`linear-gradient(0deg, rgba(0,0,0,0.25), rgba(0,0,0,0.25)), url(${homepage.promoBanner.backgroundImage.url})`}}>
+        <h2 className="font-extrabold text-4xl">{homepage.promoBanner.heading}</h2>
+        <p>{homepage.promoBanner.subHeading}</p>
+      </div>
 
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
+      <h2 className="font-semibold text-2xl text-center mt-16">Products you might like</h2>
 
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
-      </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
-      </footer>
-    </div>
+      <div className="grid sm:grid-cols-3 gap-6 mt-8">
+        {homepage.featuredProducts.items.map(product => (
+          <div key={product.id}>
+            <Link href={`/products/${product.slug}`}>
+              <a><img src={product.image.url} alt={`${product.name} Thumbnail`} /></a>
+            </Link>
+            <div className="flex flex-col">
+              <div className="flex items-center justify-between mt-3 mb-2">
+                <h4 className="font-medium">{product.name}</h4>
+                ${product.price}
+              </div>
+              <p className="text-gray-500">{product.description}</p>
+              <button type="button"
+                      className="h-11 bg-gray-900 hover:bg-gray-800 text-white uppercase text-xs tracking-wide font-bold rounded mt-4 transition-colors duration-150 ease-in-out">
+                Add to basket
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
+    </Layout>
   )
+}
+
+export async function getServerSideProps() {
+  // Define homepage query
+  const homepageQuery = `{
+    homepageCollection(limit: 1) {
+      items {
+        promoBanner {
+          heading
+          subHeading
+          backgroundImage {
+            url
+          }
+        }
+        featuredProducts {
+          items {
+            id
+            slug
+            name
+            price
+            description
+            image {
+              url
+            }
+          }
+        }
+      }
+    }
+  }`;
+  // Fetch homepage content
+  const result = await request({ query: homepageQuery });
+  // Return
+  return {
+    props: {
+      homepage: result.homepageCollection.items[0]
+    }
+  };
 }
