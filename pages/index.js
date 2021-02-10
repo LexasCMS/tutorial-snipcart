@@ -37,7 +37,7 @@ export default function Home({ homepage }) {
   )
 }
 
-export async function getServerSideProps() {
+export async function getServerSideProps({ query }) {
   // Define homepage query
   const homepageQuery = `{
     homepageCollection(limit: 1) {
@@ -64,8 +64,17 @@ export async function getServerSideProps() {
       }
     }
   }`;
+  // Define request context
+  let requestContext = {
+    audienceAttributes: {
+      localTemperature: query.localTemp !== undefined ? parseInt(query.localTemp, 10) : null
+    }
+  };
   // Fetch homepage content
-  const result = await request({ query: homepageQuery });
+  const result = await request({
+    query: homepageQuery,
+    requestContext
+  });
   // Return
   return {
     props: {
