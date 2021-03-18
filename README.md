@@ -8,7 +8,7 @@ This is the complete tutorial source code for creating a personalized e-commerce
 
 ## Tutorial
 
-Coming soon...
+[Click here](https://snipcart.com/blog/headless-cms-personalization-lexascms) to open the tutorial.
 
 ## Live Demo
 
